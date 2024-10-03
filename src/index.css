@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.css */
+.gradient-text {
+  background-image: linear-gradient(to right, #6B46C1, #4299E1); /* From purple to blue */
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari */
+  color: transparent; /* Hide original text color */
+  transition: background-position 0.3s ease-linear; /* Smooth transition */
+  background-size: 200% 100%; /* Set the size for hover effect */
+  background-position: left; /* Initial position of the gradient */
+}
+
+/* Hover effect */
+.gradient-text:hover {
+  background-position: right; /* Change to right on hover */
+}
