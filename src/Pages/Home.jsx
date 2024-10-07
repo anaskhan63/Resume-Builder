@@ -9,7 +9,7 @@ const Home = () => {
       <main className='bg-[#e6f9ff] grid grid-cols-1 md:grid-cols-2 items-center p-9 gap-3'>
         <section className='p-12 flex flex-col gap-5'>
           <h1 className='font-poppins  text-4xl font-medium'>
-            Effortlessly create a  <span className='font-bold gradient-text text-5xl'>professional resume.</span>
+            Effortlessly create  <span className='font-bold gradient-text text-5xl'>professional resume.</span>
           </h1>
           <p>
             Easily craft a standout professional resume with this powerful and free resume builder, designed to help you create polished and tailored resumes effortlessly.
