@@ -109,6 +109,7 @@ const TemplateOne = () => {
                 <label className="mt-3 text-gray-600 flex flex-col gap-2">
                   Description
                   <textarea
+                    placeholder="Just describe as a prompt"
                     className="p-2 rounded-md border bg-gray-50"
                     maxLength={100}
                     name="companyJobDescription"
@@ -179,6 +180,7 @@ const TemplateOne = () => {
             <label className="mt-3 text-gray-600 flex flex-col gap-2">
               Description
               <textarea
+                placeholder="Just describe as a prompt"
                 className="p-2 rounded-md border bg-gray-50"
                 maxLength={100}
                 name="companyJobDescription"

@@ -21,6 +21,7 @@ const CreateResume = () => {
 
   //   aiRun();
 
+  
   const { selectedTemplate } = useContext(TemplateContext);
   const navigate = useNavigate();
   if (!selectedTemplate) {

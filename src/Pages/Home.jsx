@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '../Components/Button'
 import Resumeillustration from "../assets/Resumeillustration.gif"
 import ResumeCreationSteps from '../Components/Steps'
 import ResumeStepsIllustration from "../assets/ResumeStepsIllustration.gif"
 const Home = () => {
+
+
   return (
     <>
       <main className='bg-[#e6f9ff] grid grid-cols-1 md:grid-cols-2 items-center p-9 gap-3'>

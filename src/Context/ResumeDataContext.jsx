@@ -16,12 +16,21 @@ export const ResumeDataProvider = ({ children }) => {
     CompanyName: "",
     CompanyPosition: "",
     CompanyDate: "",
-    CompanyDescription: "", // Corrected typo from "CompanyDesription" to "CompanyDescription"
+    CompanyDescription: "",
     Skills: [],
   });
 
+  
+
   return (
-    <ResumeDataContext.Provider value={{ userPersonalResumeData, setUserPersonalResumeData, userExpSkills, setUserExpSkills }}>
+    <ResumeDataContext.Provider
+      value={{
+        userPersonalResumeData,
+        setUserPersonalResumeData,
+        userExpSkills,
+        setUserExpSkills,
+      }}
+    >
       {children}
     </ResumeDataContext.Provider>
   );
