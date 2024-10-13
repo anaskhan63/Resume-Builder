@@ -25,14 +25,6 @@ const ExpANDSkillSec = () => {
   const handleExperienceSubmit = (e) => {
     e.preventDefault();
     setCompanyEXP((prev) => [...prev, CompanyEXPData]);
-
-    // Reset form data after submission
-    setCompanyEXPData({
-      CompanyName: "",
-      CompanyPosition: "",
-      CompanyJoiningDate: "",
-      companyJobDescription: "",
-    });
   };
 
   const handleCompanyExperienceDelete = (indexToDelete) => {
@@ -143,14 +135,14 @@ const ExpANDSkillSec = () => {
                 onChange={handleCompanyExpOnChange}
               ></textarea>
             </label>
+          </div>
+        </div>
             <button
               type="submit"
               className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
             >
               Add Experience
             </button>
-          </div>
-        </div>
       </form>
       <div className="skills w-full mt-3">
         <div className="w-full flex gap-2 items-center ">
