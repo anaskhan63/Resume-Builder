@@ -73,7 +73,7 @@ const ProjectSec = () => {
             })}
           </div>
         ) : null}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="text-gray-600 flex flex-col gap-2">
             Add Project
             <input
