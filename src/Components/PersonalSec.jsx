@@ -19,7 +19,6 @@ const PersonalSec = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can handle form submission, like sending the data to an API or logging it
     console.log("Submitted Data:", formData);
   };
 

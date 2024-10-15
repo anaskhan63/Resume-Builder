@@ -3,6 +3,8 @@ import { TemplateContext } from "../Context/TemplateContext";
 import { message } from "antd";
 import TemplateOne from "./TemplateOne";
 import { useNavigate } from "react-router-dom";
+import TemplateTwo from "./TemplateTwo";
+import TemplateThree from "./TemplateThree";
 
 // import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -36,8 +38,8 @@ const CreateResume = () => {
   return (
     <main>
       {selectedTemplate === "template1" && <TemplateOne />}
-      {selectedTemplate === "template2" && <h1>Template 2 Selected</h1>}
-      {selectedTemplate === "template3" && <h1>Template 3 Selected</h1>}
+      {selectedTemplate === "template2" && <h1><TemplateTwo/> </h1>}
+      {selectedTemplate === "template3" && <h1><TemplateThree/> </h1>}
     </main>
   );
 };
