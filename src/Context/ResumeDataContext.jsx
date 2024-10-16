@@ -3,22 +3,10 @@ import { createContext, useState } from "react";
 export const ResumeDataContext = createContext();
 
 export const ResumeDataProvider = ({ children }) => {
-  const [userPersonalResumeData, setUserPersonalResumeData] = useState({
-    Name: "",
-    Position: "",
-    PhoneNumber: "",
-    Linkedin: "",
-    Github: "",
-    Website: "",
-  });
+  const [userPersonalResumeData, setUserPersonalResumeData] = useState({});
 
-  const [userExpSkills, setUserExpSkills] = useState({
-    CompanyName: "",
-    CompanyPosition: "",
-    CompanyDate: "",
-    CompanyDescription: "",
-    Skills: [],
-  });
+  const [userExperienceContext, setuserExperienceContext] = useState([]);
+  const [userSkillsTag, setuserSkillsTag] = useState([]);
 
   
 
@@ -27,8 +15,10 @@ export const ResumeDataProvider = ({ children }) => {
       value={{
         userPersonalResumeData,
         setUserPersonalResumeData,
-        userExpSkills,
-        setUserExpSkills,
+        userExperienceContext,
+        setuserExperienceContext,
+        userSkillsTag,
+        setuserSkillsTag
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { TemplateContext } from "../Context/TemplateContext";
 import { message } from "antd";
 import TemplateOne from "./TemplateOne";
@@ -26,13 +26,21 @@ const CreateResume = () => {
   
   const { selectedTemplate } = useContext(TemplateContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!selectedTemplate) {
+      message.error("Please select a template first");
+      message.loading("Redirecting to Templates...");
+      
+      const timer = setTimeout(() => {
+        navigate("/templates");
+      }, 2900);
+
+      return () => clearTimeout(timer); // Cleanup the timeout on component unmount
+    }
+  }, [selectedTemplate, navigate]);
+
   if (!selectedTemplate) {
-    message.error("Please Select Template first");
-    message.loading("Redirecting to Templates")
-    setInterval(() => {
-      navigate("/templates");
-    }, 2900);
-    return null;
+    return null; // Do not render anything while redirecting
   }
 
   return (

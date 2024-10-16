@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const ExpANDSkillSec = () => {
+  const { userExperienceContext, setuserExperienceContext, userSkillsTag, setuserSkillsTag } =
+    useContext(ResumeDataContext);
+  console.log("userExperienceContext", userExperienceContext);
+  console.log("userSkillsTagContext", userSkillsTag);
+
   const [Skillstags, setSkillsTags] = useState([]);
   const [Skillsinput, setSkillsInput] = useState("");
 
@@ -25,10 +31,15 @@ const ExpANDSkillSec = () => {
   const handleExperienceSubmit = (e) => {
     e.preventDefault();
     setCompanyEXP((prev) => [...prev, CompanyEXPData]);
+    setuserExperienceContext((prev) => [...prev, CompanyEXPData]);
   };
 
   const handleCompanyExperienceDelete = (indexToDelete) => {
-    setCompanyEXP(CompanyEXP.filter((_, index) => index !== indexToDelete));
+    const updatedCompanyEXP = CompanyEXP.filter(
+      (_, index) => index !== indexToDelete
+    );
+    setCompanyEXP(updatedCompanyEXP);
+    setuserExperienceContext(updatedCompanyEXP);
   };
 
   const handleKeyDown = (e) => {
@@ -36,13 +47,16 @@ const ExpANDSkillSec = () => {
       e.preventDefault();
       if (Skillsinput.trim()) {
         setSkillsTags([...Skillstags, Skillsinput.trim()]);
+        setuserSkillsTag([...userSkillsTag, Skillsinput.trim()])
         setSkillsInput("");
       }
     }
   };
 
   const removeTag = (indexToRemove) => {
-    setSkillsTags(Skillstags.filter((_, index) => index !== indexToRemove));
+    const updatedSkills =(Skillstags.filter((_, index) => index !== indexToRemove));
+    setSkillsTags(updatedSkills);
+    setuserSkillsTag(updatedSkills);
   };
 
   return (
@@ -137,12 +151,12 @@ const ExpANDSkillSec = () => {
             </label>
           </div>
         </div>
-            <button
-              type="submit"
-              className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
-            >
-              Add Experience
-            </button>
+        <button
+          type="submit"
+          className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+        >
+          Add Experience
+        </button>
       </form>
       <div className="skills w-full mt-3">
         <div className="w-full flex gap-2 items-center ">

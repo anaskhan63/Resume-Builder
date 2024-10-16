@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const PersonalSec = () => {
+
+  const {userPersonalResumeData, setUserPersonalResumeData} = useContext(ResumeDataContext)
+  
   const [formData, setFormData] = useState({
     name: "",
     position: "",
     phone_number: "",
     linkedinURL: "",
     GithubURL: "",
+    Website: "",
   });
 
   const handleInputChange = (e) => {
@@ -19,7 +24,10 @@ const PersonalSec = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+    setUserPersonalResumeData((prev)=>({
+      ...prev,
+      ...formData
+    }))
   };
 
   return (
@@ -70,6 +78,15 @@ const PersonalSec = () => {
           placeholder="Enter Your Github (optional)"
           autoComplete="off"
           value={formData.GithubURL}
+          onChange={handleInputChange}
+        />
+         <input
+          className="p-2 rounded-md border bg-gray-50"
+          type="url"
+          name="Website"
+          placeholder="Enter Your Website (optional)"
+          autoComplete="off"
+          value={formData.Website}
           onChange={handleInputChange}
         />
         <button
