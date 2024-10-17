@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Button from './Button';
-import { FaBars, FaTimes } from 'react-icons/fa'; // Importing hamburger and close icons
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import Button from "./Button";
+import { FaBars, FaTimes } from "react-icons/fa"; // Importing hamburger and close icons
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false); // State for dropdown
@@ -13,15 +13,19 @@ const NavBar = () => {
   return (
     <>
       <nav className="flex py-5 px-6 justify-between bg-white font-outfit shadow-md">
-        <div className="logo text-xl font-bold">
-          LOGO
-        </div>
+        <Link to={"/"}>
+          <div className="logo text-xl font-bold">LOGO</div>
+        </Link>
 
-        <div className="hidden md:flex md:gap-8 items-center"> {/* Show on larger screens */}
+        <div className="hidden md:flex md:gap-8 items-center">
+          {" "}
+          {/* Show on larger screens */}
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+              isActive
+                ? "text-blue-600 underline underline-offset-4"
+                : "text-gray-700 hover:text-blue-600"
             }
           >
             Home
@@ -37,7 +41,9 @@ const NavBar = () => {
           <NavLink
             to="/templates"
             className={({ isActive }) =>
-              isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+              isActive
+                ? "text-blue-600 underline underline-offset-4"
+                : "text-gray-700 hover:text-blue-600"
             }
           >
             Choose Template
@@ -45,12 +51,13 @@ const NavBar = () => {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+              isActive
+                ? "text-blue-600 underline underline-offset-4"
+                : "text-gray-700 hover:text-blue-600"
             }
           >
             About WebApp
           </NavLink>
-
           {/* Button */}
           <Button Title="Contact" />
         </div>
@@ -65,12 +72,16 @@ const NavBar = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="bg-white shadow-lg md:hidden"> {/* Absolute positioning removed */}
+        <div className="bg-white shadow-lg md:hidden">
+          {" "}
+          {/* Absolute positioning removed */}
           <ul className="flex flex-col px-6 gap-3 py-4">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+                isActive
+                  ? "text-blue-600 underline underline-offset-4"
+                  : "text-gray-700 hover:text-blue-600"
               }
               onClick={toggleMenu} // Close menu on click
             >
@@ -79,7 +90,9 @@ const NavBar = () => {
             <NavLink
               to="/create-resume"
               className={({ isActive }) =>
-                isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+                isActive
+                  ? "text-blue-600 underline underline-offset-4"
+                  : "text-gray-700 hover:text-blue-600"
               }
               onClick={toggleMenu}
             >
@@ -88,7 +101,9 @@ const NavBar = () => {
             <NavLink
               to="/templates"
               className={({ isActive }) =>
-                isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+                isActive
+                  ? "text-blue-600 underline underline-offset-4"
+                  : "text-gray-700 hover:text-blue-600"
               }
               onClick={toggleMenu}
             >
@@ -97,7 +112,9 @@ const NavBar = () => {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? 'text-blue-600 underline underline-offset-4' : 'text-gray-700 hover:text-blue-600'
+                isActive
+                  ? "text-blue-600 underline underline-offset-4"
+                  : "text-gray-700 hover:text-blue-600"
               }
               onClick={toggleMenu}
             >
@@ -109,6 +126,6 @@ const NavBar = () => {
       )}
     </>
   );
-}
+};
 
 export default NavBar;
