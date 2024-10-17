@@ -35,12 +35,12 @@ const CreateResume = () => {
         navigate("/templates");
       }, 2900);
 
-      return () => clearTimeout(timer); // Cleanup the timeout on component unmount
+      return () => clearTimeout(timer); 
     }
   }, [selectedTemplate, navigate]);
 
   if (!selectedTemplate) {
-    return null; // Do not render anything while redirecting
+    return null; 
   }
 
   return (

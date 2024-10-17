@@ -115,7 +115,7 @@ const ProjectSec = () => {
           type="submit"
           className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
         >
-          Add PRoject
+          Add Project
         </button>
       </form>
     </div>
