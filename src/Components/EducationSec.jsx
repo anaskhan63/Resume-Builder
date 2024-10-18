@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
-import { TbWorldCode } from 'react-icons/tb';
 
 const EducationSec = () => {
   const [educationData, setEducationData] = useState([]);

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Button from "./Button";
-import { FaBars, FaTimes } from "react-icons/fa"; // Importing hamburger and close icons
+import { FaBars, FaTimes } from "react-icons/fa"; 
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false); // State for dropdown
+  const [isOpen, setIsOpen] = useState(false); 
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -19,7 +19,6 @@ const NavBar = () => {
 
         <div className="hidden md:flex md:gap-8 items-center">
           {" "}
-          {/* Show on larger screens */}
           <NavLink
             to="/"
             className={({ isActive }) =>

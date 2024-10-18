@@ -3,6 +3,7 @@ import PersonalSec from '../Components/PersonalSec'
 import ExpANDSkillSec from '../Components/ExpANDSkillSec'
 import Button from '../Components/Button'
 import ProjectSec from '../Components/ProjectSec'
+import EducationSec from '../Components/EducationSec'
 
 const TemplateTwo = () => {
   return (
@@ -12,6 +13,7 @@ const TemplateTwo = () => {
       <PersonalSec />
       <ExpANDSkillSec />
       <ProjectSec />
+      <EducationSec/>
     </section>
     <div className="flex justify-center p-5">
       <Button Title={"Generate Resume"} />
