@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { MdDelete } from 'react-icons/md';
+import React, { useState } from "react";
+import { MdDelete } from "react-icons/md";
+import ToggleSwitch from "./ToggleButton";
+import { Tooltip } from "antd";
 
 const EducationSec = () => {
   const [educationData, setEducationData] = useState([]);
   const [formData, setFormData] = useState({
-    instituteName: '',
-    degree: '',
-    date: ''
+    instituteName: "",
+    degree: "",
+    date: "",
   });
+  const [isChecked, setIsChecked] = useState(false); // State in the parent
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +24,9 @@ const EducationSec = () => {
     e.preventDefault();
     setEducationData((prevData) => [...prevData, formData]);
     setFormData({
-      instituteName: '',
-      degree: '',
-      date: ''
+      instituteName: "",
+      degree: "",
+      date: "",
     });
   };
 
@@ -31,9 +34,17 @@ const EducationSec = () => {
     setEducationData(educationData.filter((_, index) => index !== idx));
   };
 
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+  };
+  console.log("all ture", isChecked);
+
   return (
     <div className="p-5 bg-white rounded-md">
-      <h1 className="pt-4 pb-4 text-3xl font-outfit">Education</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="pt-4 pb-4 text-3xl font-outfit">Education</h1>
+        <ToggleSwitch isCheckedProp={isChecked} onToggle={handleToggle} />
+      </div>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <label className="text-gray-600 flex flex-col gap-2">
@@ -44,7 +55,7 @@ const EducationSec = () => {
               name="instituteName"
               placeholder="XYZ University"
               autoComplete="off"
-              required
+              required={isChecked ? true : false}
               value={formData.instituteName}
               onChange={handleInputChange}
             />
@@ -57,7 +68,7 @@ const EducationSec = () => {
               name="degree"
               placeholder="Bachelors in Computer Science"
               autoComplete="off"
-              required
+              required={isChecked ? true : false}
               value={formData.degree}
               onChange={handleInputChange}
             />
@@ -70,24 +81,44 @@ const EducationSec = () => {
               name="date"
               placeholder="2023 - 2027"
               autoComplete="off"
-              required
+              required={isChecked ? true : false}
               value={formData.date}
               onChange={handleInputChange}
             />
           </label>
         </div>
-        <button type="submit" className="p-3 border rounded mt-2 float-end hover:bg-gray-100">
-          Add Education
-        </button>
+        {isChecked ? (
+          <button
+            type="submit"
+            className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+          >
+            Add Education
+          </button>
+        ) : (
+          <Tooltip title="Please Toggle Required first">
+            <button
+              disabled={true}
+              type="submit"
+              className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+            >
+              Add Education
+            </button>
+          </Tooltip>
+        )}
       </form>
 
       {/* Display added education data */}
       {educationData.length > 0 && (
         <div className="experience-map-div grid grid-cols-1 gap-4 mt-3 mb-4 p-2 rounded-md border">
           {educationData.map((education, idx) => (
-            <div key={idx} className="p-3 flex items-start justify-between bg-slate-50 border rounded">
+            <div
+              key={idx}
+              className="p-3 flex items-start justify-between bg-slate-50 border rounded"
+            >
               <div className="flex flex-col gap-2">
-                <h1 className="font-bold text-xl font-outfit">{education.instituteName}</h1>
+                <h1 className="font-bold text-xl font-outfit">
+                  {education.instituteName}
+                </h1>
                 <p className="text-sm font-raleway">{education.degree}</p>
                 <p className="text-sm font-raleway">{education.date}</p>
               </div>

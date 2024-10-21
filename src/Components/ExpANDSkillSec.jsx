@@ -1,12 +1,20 @@
 import React, { useContext, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { ResumeDataContext } from "../Context/ResumeDataContext";
+import ToggleSwitch from "./ToggleButton";
+import { message, Tooltip } from "antd";
 
 const ExpANDSkillSec = () => {
-  const { userExperienceContext, setuserExperienceContext, userSkillsTag, setuserSkillsTag } =
-    useContext(ResumeDataContext);
+  const {
+    userExperienceContext,
+    setuserExperienceContext,
+    userSkillsTag,
+    setuserSkillsTag,
+  } = useContext(ResumeDataContext);
+
   console.log("userExperienceContext", userExperienceContext);
   console.log("userSkillsTagContext", userSkillsTag);
+  const [isChecked, setIsChecked] = useState(false); // State in the parent
 
   const [Skillstags, setSkillsTags] = useState([]);
   const [Skillsinput, setSkillsInput] = useState("");
@@ -47,21 +55,33 @@ const ExpANDSkillSec = () => {
       e.preventDefault();
       if (Skillsinput.trim()) {
         setSkillsTags([...Skillstags, Skillsinput.trim()]);
-        setuserSkillsTag([...userSkillsTag, Skillsinput.trim()])
+        setuserSkillsTag([...userSkillsTag, Skillsinput.trim()]);
         setSkillsInput("");
       }
     }
   };
 
   const removeTag = (indexToRemove) => {
-    const updatedSkills =(Skillstags.filter((_, index) => index !== indexToRemove));
+    const updatedSkills = Skillstags.filter(
+      (_, index) => index !== indexToRemove
+    );
     setSkillsTags(updatedSkills);
     setuserSkillsTag(updatedSkills);
   };
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+  };
+
+  console.log("toggle", isChecked);
 
   return (
     <div className="p-5 bg-white rounded-md">
-      <h1 className="pt-4 pb-4 text-3xl  font-outfit">Experience and Skills</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="pt-4 pb-4 text-3xl  font-outfit">
+          Experience and Skills
+        </h1>
+        <ToggleSwitch isCheckedProp={isChecked} onToggle={handleToggle} />
+      </div>
       <form onSubmit={handleExperienceSubmit} className="flex flex-col gap-4">
         <div className="exp">
           <div className="inputData">
@@ -106,7 +126,7 @@ const ExpANDSkillSec = () => {
                   name="CompanyName"
                   placeholder="Enter Company Name"
                   autoComplete="off"
-                  required
+                  required={isChecked ? true : false}
                   value={CompanyEXPData.CompanyName}
                   onChange={handleCompanyExpOnChange}
                 />
@@ -119,7 +139,7 @@ const ExpANDSkillSec = () => {
                   name="CompanyPosition"
                   placeholder="Enter Your Position"
                   autoComplete="off"
-                  required
+                  required={isChecked ? true : false}
                   value={CompanyEXPData.CompanyPosition}
                   onChange={handleCompanyExpOnChange}
                 />
@@ -132,7 +152,7 @@ const ExpANDSkillSec = () => {
                   name="CompanyJoiningDate"
                   placeholder="2023 - present"
                   autoComplete="off"
-                  required
+                  required={isChecked ? true : false}
                   value={CompanyEXPData.CompanyJoiningDate}
                   onChange={handleCompanyExpOnChange}
                 />
@@ -151,12 +171,24 @@ const ExpANDSkillSec = () => {
             </label>
           </div>
         </div>
-        <button
-          type="submit"
-          className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
-        >
-          Add Experience
-        </button>
+        {isChecked ? (
+          <button
+            type="submit"
+            className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+          >
+            Add Experience
+          </button>
+        ) : (
+          <Tooltip title="Please Toggle Required first">
+            <button
+              disabled={true}
+              type="submit"
+              className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+            >
+              Add Experience
+            </button>
+          </Tooltip>
+        )}
       </form>
       <div className="skills w-full mt-3">
         <div className="w-full flex gap-2 items-center ">

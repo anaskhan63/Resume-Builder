@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { TbWorldCode } from "react-icons/tb";
+import ToggleSwitch from "./ToggleButton";
+import { Tooltip } from "antd";
 
 const ProjectSec = () => {
   const [AllUserProject, setAllUserProject] = useState([]);
@@ -9,6 +11,7 @@ const ProjectSec = () => {
     ProjectURL: "",
     ProjectDescription: "",
   });
+  const [isChecked, setIsChecked] = useState(false); // State in the parent
 
   const hanldeProjectOnChange = (e) => {
     const { name, value } = e.target;
@@ -25,26 +28,35 @@ const ProjectSec = () => {
       ProjectTitle: "",
       ProjectURL: "",
       ProjectDescription: "",
-    })
+    });
   };
 
   const handleUserProjectDelete = (Currentidx) => {
     setAllUserProject(
       AllUserProject.filter((_, index) => index !== Currentidx)
     );
-    
+  };
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
   };
   console.log("all prjects", AllUserProject);
+  console.log("all ture", isChecked);
 
   return (
     <div className="p-5 bg-white rounded-md">
-      <h1 className="pt-4 pb-4 text-3xl  font-outfit">Project's</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="pt-4 pb-4 text-3xl  font-outfit">Project's</h1>
+        <ToggleSwitch isCheckedProp={isChecked} onToggle={handleToggle} />
+      </div>
       <form onSubmit={handleProjectSubmit} className="flex flex-col gap-4">
         {AllUserProject.length > 0 ? (
           <div className="experience-map-div grid grid-cols-1 gap-4 mt-3 mb-4 p-2 rounded-md border">
             {AllUserProject.map((currElem, idx) => {
               return (
-                <div key={idx} className="p-3 flex items-start justify-between bg-slate-50 border rounded">
+                <div
+                  key={idx}
+                  className="p-3 flex items-start justify-between bg-slate-50 border rounded"
+                >
                   <div className="flex flex-col gap-2">
                     <h1 className="font-bold text-xl font-outfit">
                       {currElem.ProjectTitle}
@@ -82,7 +94,7 @@ const ProjectSec = () => {
               name="ProjectTitle"
               placeholder="Enter Project Name"
               autoComplete="off"
-              required
+              required={isChecked ? true : false}
               value={UserProject.ProjectTitle}
               onChange={hanldeProjectOnChange}
             />
@@ -107,16 +119,30 @@ const ProjectSec = () => {
             className="p-2 rounded-md border bg-gray-50"
             maxLength={200}
             name="ProjectDescription"
+            required={isChecked ? true : false}
             value={UserProject.ProjectDescription}
             onChange={hanldeProjectOnChange}
           ></textarea>
         </label>
-        <button
-          type="submit"
-          className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
-        >
-          Add Project
-        </button>
+
+        {isChecked ? (
+          <button
+            type="submit"
+            className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+          >
+            Add Project
+          </button>
+        ) : (
+          <Tooltip title="Please Toggle Required first">
+            <button
+              disabled={true}
+              type="submit"
+              className="p-3 border rounded mt-2 float-end hover:bg-gray-100"
+            >
+              Add Project
+            </button>
+          </Tooltip>
+        )}
       </form>
     </div>
   );
