@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import ToggleSwitch from "./ToggleButton";
 import { Tooltip } from "antd";
+import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const EducationSec = () => {
+  const {userEducationContext, setuserEducationContext}=useContext(ResumeDataContext);
+  console.log("userEducationContext", userEducationContext);
+  
   const [educationData, setEducationData] = useState([]);
   const [formData, setFormData] = useState({
     instituteName: "",
     degree: "",
     date: "",
   });
-  const [isChecked, setIsChecked] = useState(false); // State in the parent
+  const [isChecked, setIsChecked] = useState(false); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +27,8 @@ const EducationSec = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setEducationData((prevData) => [...prevData, formData]);
+    setuserEducationContext((prevData) => [...prevData, formData]);
+    
     setFormData({
       instituteName: "",
       degree: "",
@@ -32,6 +38,7 @@ const EducationSec = () => {
 
   const handleDelete = (idx) => {
     setEducationData(educationData.filter((_, index) => index !== idx));
+    setuserEducationContext(educationData.filter((_, index) => index !== idx));
   };
 
   const handleToggle = () => {

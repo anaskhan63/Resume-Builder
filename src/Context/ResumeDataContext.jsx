@@ -7,6 +7,8 @@ export const ResumeDataProvider = ({ children }) => {
 
   const [userExperienceContext, setuserExperienceContext] = useState([]);
   const [userSkillsTag, setuserSkillsTag] = useState([]);
+  const [userProjectContext, setuserProjectContext] = useState([]);
+  const [userEducationContext, setuserEducationContext] = useState([]);
 
   
 
@@ -18,7 +20,11 @@ export const ResumeDataProvider = ({ children }) => {
         userExperienceContext,
         setuserExperienceContext,
         userSkillsTag,
-        setuserSkillsTag
+        setuserSkillsTag,
+        userProjectContext,
+        setuserProjectContext,
+        userEducationContext,
+        setuserEducationContext
       }}
     >
       {children}

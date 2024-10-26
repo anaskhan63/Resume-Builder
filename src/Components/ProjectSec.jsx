@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { TbWorldCode } from "react-icons/tb";
 import ToggleSwitch from "./ToggleButton";
 import { Tooltip } from "antd";
+import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const ProjectSec = () => {
+  const {userProjectContext, setuserProjectContext}=useContext(ResumeDataContext);
+  
   const [AllUserProject, setAllUserProject] = useState([]);
   const [UserProject, setUserProject] = useState({
     ProjectTitle: "",
     ProjectURL: "",
     ProjectDescription: "",
   });
-  const [isChecked, setIsChecked] = useState(false); // State in the parent
+  const [isChecked, setIsChecked] = useState(false); 
 
   const hanldeProjectOnChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,7 @@ const ProjectSec = () => {
   const handleProjectSubmit = (e) => {
     e.preventDefault();
     setAllUserProject((prev) => [...prev, UserProject]);
+    setuserProjectContext((prev)=> [...prev, UserProject])
     setUserProject({
       ProjectTitle: "",
       ProjectURL: "",
@@ -35,12 +39,13 @@ const ProjectSec = () => {
     setAllUserProject(
       AllUserProject.filter((_, index) => index !== Currentidx)
     );
+    setuserProjectContext(
+      AllUserProject.filter((_, index) => index !== Currentidx)
+    );
   };
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
-  console.log("all prjects", AllUserProject);
-  console.log("all ture", isChecked);
 
   return (
     <div className="p-5 bg-white rounded-md">
