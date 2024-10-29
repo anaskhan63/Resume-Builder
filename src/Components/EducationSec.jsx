@@ -1,20 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import ToggleSwitch from "./ToggleButton";
 import { Tooltip } from "antd";
 import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const EducationSec = () => {
-  const {userEducationContext, setuserEducationContext}=useContext(ResumeDataContext);
+  const { userEducationContext, setuserEducationContext, setEducationStatus } =
+    useContext(ResumeDataContext);
   console.log("userEducationContext", userEducationContext);
-  
+
   const [educationData, setEducationData] = useState([]);
   const [formData, setFormData] = useState({
     instituteName: "",
     degree: "",
     date: "",
   });
-  const [isChecked, setIsChecked] = useState(false); 
+  const [isChecked, setIsChecked] = useState(false);
+
+  // checking status
+  useEffect(() => {
+    if (educationData.length > 0) {
+      setEducationStatus(true);
+    } else {
+      setEducationStatus(false);
+    }
+  }, [educationData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +38,7 @@ const EducationSec = () => {
     e.preventDefault();
     setEducationData((prevData) => [...prevData, formData]);
     setuserEducationContext((prevData) => [...prevData, formData]);
-    
+
     setFormData({
       instituteName: "",
       degree: "",
@@ -44,7 +54,6 @@ const EducationSec = () => {
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
-  console.log("all ture", isChecked);
 
   return (
     <div className="p-5 bg-white rounded-md">

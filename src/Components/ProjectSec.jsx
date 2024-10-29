@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { TbWorldCode } from "react-icons/tb";
 import ToggleSwitch from "./ToggleButton";
@@ -6,16 +6,25 @@ import { Tooltip } from "antd";
 import { ResumeDataContext } from "../Context/ResumeDataContext";
 
 const ProjectSec = () => {
-  const {userProjectContext, setuserProjectContext}=useContext(ResumeDataContext);
-  
+  const { userProjectContext, setuserProjectContext, setProjectStatus } =
+    useContext(ResumeDataContext);
+
   const [AllUserProject, setAllUserProject] = useState([]);
   const [UserProject, setUserProject] = useState({
     ProjectTitle: "",
     ProjectURL: "",
     ProjectDescription: "",
   });
-  const [isChecked, setIsChecked] = useState(false); 
-
+  const [isChecked, setIsChecked] = useState(false);
+  // checking status
+  useEffect(() => {
+    if (AllUserProject.length > 0) {
+      setProjectStatus(true);
+    } else {
+      setProjectStatus(false);
+    }
+  }, [AllUserProject]);
+  
   const hanldeProjectOnChange = (e) => {
     const { name, value } = e.target;
     setUserProject((prev) => ({
@@ -27,7 +36,7 @@ const ProjectSec = () => {
   const handleProjectSubmit = (e) => {
     e.preventDefault();
     setAllUserProject((prev) => [...prev, UserProject]);
-    setuserProjectContext((prev)=> [...prev, UserProject])
+    setuserProjectContext((prev) => [...prev, UserProject]);
     setUserProject({
       ProjectTitle: "",
       ProjectURL: "",

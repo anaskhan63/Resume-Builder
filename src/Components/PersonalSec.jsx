@@ -3,7 +3,11 @@ import { ResumeDataContext } from "../Context/ResumeDataContext";
 import { message } from "antd";
 
 const PersonalSec = () => {
-  const { userPersonalResumeData, setUserPersonalResumeData } = useContext(ResumeDataContext);
+  const {
+    userPersonalResumeData,
+    setUserPersonalResumeData,
+    setPersonalSecStatus,
+  } = useContext(ResumeDataContext);
   const [formData, setFormData] = useState({
     name: "",
     position: "",
@@ -23,11 +27,12 @@ const PersonalSec = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserPersonalResumeData((prev) => ({
-      ...prev,
-      ...formData,
-    }));
-    setPersonalSecStatus(true)
+    setUserPersonalResumeData(formData);
+    if (Object.keys(formData).length > 0) {
+      setPersonalSecStatus(true);
+    } else {
+      setPersonalSecStatus(false);
+    }
     message.success("Data Added Successfully!");
   };
 
@@ -46,7 +51,7 @@ const PersonalSec = () => {
           value={formData.name}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="position">Position</label>
         <input
           className="p-2 rounded-md border bg-gray-50"
@@ -59,7 +64,7 @@ const PersonalSec = () => {
           value={formData.position}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="phone_number">Phone Number (optional)</label>
         <input
           className="p-2 rounded-md border bg-gray-50"
@@ -71,7 +76,7 @@ const PersonalSec = () => {
           value={formData.phone_number}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="linkedinURL">LinkedIn (optional)</label>
         <input
           className="p-2 rounded-md border bg-gray-50"
@@ -83,7 +88,7 @@ const PersonalSec = () => {
           value={formData.linkedinURL}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="GithubURL">GitHub (optional)</label>
         <input
           className="p-2 rounded-md border bg-gray-50"
@@ -95,7 +100,7 @@ const PersonalSec = () => {
           value={formData.GithubURL}
           onChange={handleInputChange}
         />
-        
+
         <label htmlFor="Website">Website (optional)</label>
         <input
           className="p-2 rounded-md border bg-gray-50"
@@ -107,7 +112,7 @@ const PersonalSec = () => {
           value={formData.Website}
           onChange={handleInputChange}
         />
-        
+
         <button
           type="submit"
           className="p-3 border rounded mt-2 float-end hover:bg-gray-100"

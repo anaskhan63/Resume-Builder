@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { ResumeDataContext } from "../Context/ResumeDataContext";
 import ToggleSwitch from "./ToggleButton";
@@ -10,23 +10,37 @@ const ExpANDSkillSec = () => {
     setuserExperienceContext,
     userSkillsTag,
     setuserSkillsTag,
+    setUserExperienceStatus,
+    setUserSkillsTagsStatus,
   } = useContext(ResumeDataContext);
 
-  console.log("userExperienceContext", userExperienceContext);
-  console.log("userSkillsTagContext", userSkillsTag);
-  const [isChecked, setIsChecked] = useState(false); // State in the parent
-
+  const [isChecked, setIsChecked] = useState(false);
   const [Skillstags, setSkillsTags] = useState([]);
   const [Skillsinput, setSkillsInput] = useState("");
-
   const [CompanyEXP, setCompanyEXP] = useState([]);
-
   const [CompanyEXPData, setCompanyEXPData] = useState({
     CompanyName: "",
     CompanyPosition: "",
     CompanyJoiningDate: "",
     companyJobDescription: "",
   });
+
+  // checking status
+  useEffect(() => {
+    if (Skillstags.length > 0) {
+      setUserSkillsTagsStatus(true);
+    } else {
+      setUserSkillsTagsStatus(false);
+    }
+  }, [Skillstags]);
+
+  useEffect(() => {
+    if (CompanyEXP.length > 0) {
+      setUserExperienceStatus(true);
+    } else {
+      setUserExperienceStatus(false);
+    }
+  }, [CompanyEXP]);
 
   const handleCompanyExpOnChange = (e) => {
     const { name, value } = e.target;
@@ -71,8 +85,6 @@ const ExpANDSkillSec = () => {
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
-
-  console.log("toggle", isChecked);
 
   return (
     <div className="p-5 bg-white rounded-md">
