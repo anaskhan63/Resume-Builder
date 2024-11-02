@@ -20,14 +20,14 @@ export const ResumeDataProvider = ({ children }) => {
     <ResumeDataContext.Provider
       value={{
         userPersonalResumeData,
-        setUserPersonalResumeData,
         userExperienceContext,
-        setuserExperienceContext,
         userSkillsTag,
-        setuserSkillsTag,
         userProjectContext,
-        setuserProjectContext,
         userEducationContext,
+        setUserPersonalResumeData,
+        setuserExperienceContext,
+        setuserSkillsTag,
+        setuserProjectContext,
         setuserEducationContext,
         setPersonalSecStatus,
         setUserExperienceStatus,

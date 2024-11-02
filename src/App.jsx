@@ -3,6 +3,7 @@ import { TemplateProvider } from "./Context/TemplateContext";
 import Router from "./Router/Router";
 import { message } from "antd";
 import { ResumeDataProvider } from "./Context/ResumeDataContext";
+import { GenerateDataByGemeniProvider } from "./Context/GenerateDataByGemeni";
 
 function App() {
   useEffect(() => {
@@ -12,9 +13,11 @@ function App() {
     <>
       <TemplateProvider>
         <ResumeDataProvider>
-          <div>
-            <Router />
-          </div>
+          <GenerateDataByGemeniProvider>
+            <div>
+              <Router />
+            </div>
+          </GenerateDataByGemeniProvider>
         </ResumeDataProvider>
       </TemplateProvider>
     </>
